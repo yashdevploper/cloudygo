@@ -2,10 +2,12 @@
 
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import axios from "axios";
 import Link from "next/link";
 
-const VerifyEmailPage = () => {
+// Client component that uses useSearchParams
+const VerifyEmailContent = () => {
   const searchParams = useSearchParams();
   const [countdown, setCountdown] = useState(30);
   const [isVerifying, setIsVerifying] = useState(false);
@@ -169,6 +171,26 @@ const VerifyEmailPage = () => {
         )}
       </div>
     </div>
+  );
+};
+
+// Main page component with Suspense boundary
+const VerifyEmailPage = () => {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex items-center justify-center p-4">
+          <div className="text-center">
+            <h1 className="text-3xl font-bold text-white mb-2">Loading...</h1>
+            <p className="text-gray-300">
+              Please wait while we verify your email
+            </p>
+          </div>
+        </div>
+      }
+    >
+      <VerifyEmailContent />
+    </Suspense>
   );
 };
 
