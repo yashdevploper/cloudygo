@@ -22,12 +22,11 @@ const NavBar = () => {
       {/* Logo Section */}
       <Link href={"/"}>
         <div className="flex items-center space-x-2">
-          <Image
+          <img
             src="/logos/logo.png"
             alt="Application Logo"
             width={80}
             height={32}
-            className="cursor-pointer transform hover:scale-105 transition duration-300"
           />
         </div>
       </Link>
