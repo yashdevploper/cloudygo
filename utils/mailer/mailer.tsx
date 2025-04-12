@@ -91,12 +91,15 @@ export async function sendEmail({ userId, email, emailType }: SendEmailParams) {
         : undefined
     );
 
+    const user = process.env.MAILTRAP_USER;
+    const pass = process.env.MAILTRAP_PASS;
+
     let transport = nodemailer.createTransport({
       host: "sandbox.smtp.mailtrap.io",
       port: 2525,
       auth: {
-        user: "f5440b348f6b56",
-        pass: "421966da72112b",
+        user,
+        pass,
       },
     });
 
