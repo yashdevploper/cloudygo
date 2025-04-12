@@ -23,7 +23,7 @@ const NavBar = () => {
       <Link href={"/"}>
         <div className="flex items-center space-x-2">
           <Image
-            src="/png/profile.png"
+            src="/png/logo.png"
             alt="Application Logo"
             width={80}
             height={32}
