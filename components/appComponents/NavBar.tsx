@@ -70,7 +70,7 @@ const NavBar = () => {
               height={40}
               sizes="(max-width: 640px) 60px, 80px"
               alt="Profile"
-              className="rounded-full bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200 w-[48px] h-[34px] sm:w-[40px] sm:h-[40px]"
+              className="rounded-full bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200 w-[48px] h-[24px] sm:w-[40px] sm:h-[40px]"
             />
           </div>
         </Link>
