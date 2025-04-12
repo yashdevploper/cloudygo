@@ -40,7 +40,7 @@ export default function ProfilePage() {
         setIsLoading(true);
         const res = await axios.get("/api/user/profile");
         setUser(res.data.data);
-      } catch (error: any) {
+      } catch (error: unknown) {
         toast.error("Failed to load profile. Please login again.");
         console.error("Profile fetch error:", error);
         router.push("/login");
@@ -61,9 +61,10 @@ export default function ProfilePage() {
 
       toast.success("Logged out successfully!");
       router.push("/login");
-    } catch (error: any) {
-      toast.error(error?.message || "Something went wrong");
-      console.error("Logout error:", error);
+    } catch (error: unknown) {
+      const typedError = error as Error;
+      toast.error(typedError?.message || "Something went wrong");
+      console.error("Logout error:", typedError);
     }
   };
 
@@ -138,7 +139,7 @@ export default function ProfilePage() {
                     <div>
                       <CardTitle>Weather History</CardTitle>
                       <CardDescription>
-                        Recent locations you've checked
+                        Recent locations you&apos;ve checked
                       </CardDescription>
                     </div>
                     <History className="h-5 w-5 text-muted-foreground" />

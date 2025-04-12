@@ -5,7 +5,7 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import axios from "axios";
 
-const signupPage = () => {
+const SignupPage = () => {
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -60,10 +60,19 @@ const signupPage = () => {
         setFormData({ username: "", email: "", password: "" });
         setConfirmPassword("");
       }
-    } catch (err: any) {
+    } catch (error: unknown) {
+      const typedError = error as {
+        response?: {
+          data?: {
+            error?: string;
+            message?: string;
+          };
+        };
+      };
+
       const errorMessage =
-        err.response?.data?.error ||
-        err.response?.data?.message ||
+        typedError.response?.data?.error ||
+        typedError.response?.data?.message ||
         "Registration failed. Please try again.";
 
       setPasswordError(errorMessage);
@@ -108,8 +117,8 @@ const signupPage = () => {
                 Registration Successful!
               </h3>
               <p className="text-gray-300 mb-6">
-                We've sent a verification email to your inbox. Please check your
-                email to complete the verification process.
+                We&apos;ve sent a verification email to your inbox. Please check
+                your email to complete the verification process.
               </p>
               <button
                 onClick={() => setSignupSuccess(false)}
@@ -256,4 +265,4 @@ const signupPage = () => {
   );
 };
 
-export default signupPage;
+export default SignupPage;

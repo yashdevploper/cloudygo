@@ -4,7 +4,7 @@ import { useCity } from "@/context/searchCityContext";
 import Link from "next/link";
 
 const NavBar = () => {
-  const { city, setCity, fetchWeatherData } = useCity();
+  const { setCity, fetchWeatherData } = useCity();
   const [searchInput, setSearchInput] = useState("");
 
   const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -20,15 +20,17 @@ const NavBar = () => {
   return (
     <nav className="flex items-center justify-between px-6 py-1 border-b border-gray-800 rounded sticky">
       {/* Logo Section */}
-      <div className="flex items-center space-x-2">
-        <Image
-          src="/logos/logo.png"
-          alt="Application Logo"
-          width={80}
-          height={32}
-          className="cursor-pointer transform hover:scale-105 transition duration-300"
-        />
-      </div>
+      <Link href={"/"}>
+        <div className="flex items-center space-x-2">
+          <Image
+            src="/logos/logo.png"
+            alt="Application Logo"
+            width={80}
+            height={32}
+            className="cursor-pointer transform hover:scale-105 transition duration-300"
+          />
+        </div>
+      </Link>
 
       {/* Search Bar Section */}
       <div className="flex-grow max-w-2xl mx-8">
