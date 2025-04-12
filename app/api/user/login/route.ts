@@ -5,8 +5,6 @@ import type { NextRequest } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import sendEmail from "@/utils/mailer/mailer";
-import { cookies } from "next/headers";
-
 connectUser();
 
 export async function POST(request: NextRequest) {
