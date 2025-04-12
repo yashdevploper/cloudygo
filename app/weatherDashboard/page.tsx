@@ -46,9 +46,9 @@ export default function WeatherDashboard() {
   };
 
   return (
-    <div>
+    <div className="w-full min-h-screen radialBg">
       <NavBar />
-      <div className="w-full min-h-screen radialBg px-3 py-4 sm:px-4 sm:py-6 lg:px-6">
+      <div className=" px-3 py-4 sm:px-4 sm:py-6 lg:px-6">
         <main className="max-w-7xl mx-auto space-y-6 sm:space-y-8 mt-6">
           <section className="favorites">
             <h2 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 px-1">
