@@ -23,7 +23,7 @@ const NavBar = () => {
       <Link href={"/"}>
         <div className="flex items-center space-x-2">
           <Image
-            src="/logos/profile.png"
+            src="/png/profile.png"
             alt="Application Logo"
             width={80}
             height={32}
@@ -63,7 +63,7 @@ const NavBar = () => {
         <Link href={"/profile"}>
           <div>
             <Image
-              src="/logos/profile.png"
+              src="/png/profile.png"
               width={40}
               height={40}
               alt="Profile"
