@@ -27,7 +27,7 @@ const NavBar = () => {
             alt="Application Logo"
             width={80}
             height={32}
-            className="cursor-pointer transform hover:scale-105 transition duration-300"
+            className="cursor-pointer transform hover:scale-105 transition duration-300 w-14 sm:w-[80px] sm:h-[72px]"
           />
         </div>
       </Link>
@@ -56,6 +56,8 @@ const NavBar = () => {
             alt="Theme toggle"
             width={24}
             height={24}
+            sizes="(max-width: 640px) 60px, 80px"
+            className="w-[44px] h-[34px] sm:w-[24px] sm:h-[24px]"
           />
         </button>
 
@@ -66,8 +68,9 @@ const NavBar = () => {
               src="/png/profile.png"
               width={40}
               height={40}
+              sizes="(max-width: 640px) 60px, 80px"
               alt="Profile"
-              className="rounded-full bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200"
+              className="rounded-full bg-gray-700 hover:bg-gray-600 cursor-pointer transition duration-200 w-[48px] h-[34px] sm:w-[40px] sm:h-[40px]"
             />
           </div>
         </Link>
