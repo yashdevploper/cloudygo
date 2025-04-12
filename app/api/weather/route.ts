@@ -6,6 +6,14 @@ import { getDataFromToken } from "@/utils/getDataFromToken";
 
 connectUser();
 
+// Define custom error interface for better type safety
+interface ApiError extends Error {
+  response?: {
+    status: number;
+    data?: any;
+  };
+}
+
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
@@ -72,17 +80,15 @@ export async function POST(request: NextRequest) {
     );
 
     if (!user) {
-      return NextResponse.json(
-        { error: "User not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
     return NextResponse.json({ data }, { status: 200 });
-  } catch (err: any) {
-    console.error("Weather API Error:", err);
+  } catch (error: unknown) {
+    const typedError = error as ApiError;
+    console.error("Weather API Error:", typedError);
     return NextResponse.json(
-      { error: err.message || "Internal server error" },
+      { error: typedError.message || "Internal server error" },
       { status: 500 }
     );
   }
@@ -91,7 +97,7 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     const url = new URL(request.url);
-    const city = url.searchParams.get('city');
+    const city = url.searchParams.get("city");
 
     if (!city) {
       return NextResponse.json(
@@ -140,15 +146,19 @@ export async function GET(request: NextRequest) {
           { new: true }
         );
       }
-    } catch (authErr) {
-      console.log("Non-authenticated weather request or user history update failed");
+    } catch (_) {
+      // Ignore authentication errors - user can still get weather without being logged in
+      console.log(
+        "Non-authenticated weather request or user history update failed"
+      );
     }
 
     return NextResponse.json({ data }, { status: 200 });
-  } catch (err: any) {
-    console.error("Weather API Error:", err);
+  } catch (error: unknown) {
+    const typedError = error as ApiError;
+    console.error("Weather API Error:", typedError);
     return NextResponse.json(
-      { error: err.message || "Internal server error" },
+      { error: typedError.message || "Internal server error" },
       { status: 500 }
     );
   }

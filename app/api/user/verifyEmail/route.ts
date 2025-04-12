@@ -8,7 +8,7 @@ connectUser();
 
 export async function POST(request: NextRequest) {
   console.log("Verification started");
-  
+
   try {
     const reqBody = await request.json();
     const { token } = reqBody;
@@ -30,12 +30,16 @@ export async function POST(request: NextRequest) {
     await user.save();
 
     console.log("Email Verified");
-    
+
     return NextResponse.json(
       { message: "User verified Successfully", success: true },
       { status: 200 }
     );
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (error: unknown) {
+    const typedError = error as Error;
+    return NextResponse.json(
+      { error: typedError.message || "Email verification failed" },
+      { status: 500 }
+    );
   }
 }

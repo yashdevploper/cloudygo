@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
     });
 
     response.cookies.set("token", jsonToken, {
-      maxAge: 60 * 60 * 24 * 30,  
+      maxAge: 60 * 60 * 24 * 30,
       httpOnly: true,
     });
 
@@ -71,7 +71,12 @@ export async function POST(request: NextRequest) {
     });
 
     return response;
-  } catch (err: any) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+  } catch (error: unknown) {
+    // Convert to more specific type
+    const typedError = error as Error;
+    return NextResponse.json(
+      { error: typedError.message || "Login failed" },
+      { status: 500 }
+    );
   }
 }
