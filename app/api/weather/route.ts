@@ -10,7 +10,7 @@ connectUser();
 interface ApiError extends Error {
   response?: {
     status: number;
-    data?: any;
+    data?: unknown;
   };
 }
 
@@ -146,10 +146,9 @@ export async function GET(request: NextRequest) {
           { new: true }
         );
       }
-    } catch (_) {
-      // Ignore authentication errors - user can still get weather without being logged in
+    } catch (err) {
       console.log(
-        "Non-authenticated weather request or user history update failed"
+        "Non-authenticated weather request or user history update failed", err
       );
     }
 

@@ -4,9 +4,14 @@ import { useState, FormEvent, ChangeEvent } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
-const loginPage = () => {
+interface ErrorResponse {
+  error?: string;
+  message?: string;
+}
+
+const LoginPage = () => {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -48,10 +53,11 @@ const loginPage = () => {
         setIsLoading(false);
         router.push("/weatherDashboard");
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
+      const axiosError = err as AxiosError<ErrorResponse>;
       const message =
-        err.response?.data?.error ||
-        err.response?.data?.message ||
+        axiosError.response?.data?.error ||
+        axiosError.response?.data?.message ||
         "login failed. Please try again.";
 
       setErrorMessage(message);
@@ -151,7 +157,7 @@ const loginPage = () => {
 
         {/* Signup Link */}
         <p className="text-center text-gray-400">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link
             href="/signup"
             className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent hover:opacity-80 transition-opacity duration-200"
@@ -164,4 +170,4 @@ const loginPage = () => {
   );
 };
 
-export default loginPage;
+export default LoginPage;
