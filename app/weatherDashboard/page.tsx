@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect} from "react";
 import { LineDoteChart } from "@/components/ui/lineChartCustomDots";
 import NavBar from "@/components/appComponents/NavBar";
 import { WeatherLocationCard } from "@/components/appComponents/WeatherLocationCard";
