@@ -20,7 +20,7 @@ const NavBar = () => {
     }
   };
 
-  const { theme} = useTheme();
+  const { theme } = useTheme();
 
   return (
     <nav className="flex items-center justify-between px-3 py-1 border-b border-gray-800 rounded sm:px-6">
@@ -30,8 +30,8 @@ const NavBar = () => {
           <Image
             src={`${
               theme === "Dark"
-                ? "/png/logoDarkTheme.png"
-                : "/png/logoLightTheme.png"
+                ? "/png/logos/logoDarkTheme.png"
+                : "/png/logos/logoLightTheme.png"
             }`}
             alt="Application Logo"
             width={80}
@@ -61,8 +61,8 @@ const NavBar = () => {
 
       {/* Profile and Theme Section */}
       <div className="flex items-center space-x-6">
-        <ThemeToggle/>
-        
+        <ThemeToggle />
+
         {/* Profile Icon*/}
         <Link href={"/profile"}>
           <div>
