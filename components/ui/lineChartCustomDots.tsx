@@ -112,8 +112,8 @@ export function LineDoteChart() {
   };
 
   return (
-    <Card className="w-full">
-      <CardHeader>
+    <Card className="w-full h-full">
+      <CardHeader className="pb-2">
         <CardTitle>Weather Forecast</CardTitle>
         <CardDescription>
           {weatherData
@@ -178,7 +178,7 @@ export function LineDoteChart() {
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter className="flex-col items-start gap-2 text-sm">
+      <CardFooter className="flex-col items-start gap-2 text-sm py-4">
         <div className="flex gap-2 font-medium leading-none">
           {trend.direction === "up" ? "Trending up" : "Trending down"} by{" "}
           {trend.value}% this week

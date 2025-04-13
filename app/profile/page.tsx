@@ -15,6 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { LogOut, User, MapPin, History, Heart, Settings } from "lucide-react";
+import { useTheme } from "@/context/themeProvider";
 
 interface UserProfile {
   _id?: string;
@@ -32,6 +33,7 @@ export default function ProfilePage() {
   const router = useRouter();
   const [user, setUser] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const {theme} = useTheme();
 
   // Fetch user details on page load
   useEffect(() => {
@@ -69,7 +71,9 @@ export default function ProfilePage() {
   };
 
   return (
-    <div className="min-h-screen radialBg">
+    <div
+      className={`min-h-screen ${theme === "Dark" ? "radialBg" : "bg-light-gradient"}`}
+    >
       <NavBar />
 
       <main className="max-w-4xl mx-auto px-4 py-8">
@@ -122,7 +126,7 @@ export default function ProfilePage() {
               <CardFooter>
                 <Button
                   variant="destructive"
-                  className="w-full"
+                  className="w-full cursor-pointer"
                   onClick={handleLogout}
                 >
                   <LogOut className="mr-2 h-4 w-4" /> Logout

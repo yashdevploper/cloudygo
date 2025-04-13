@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
+import ThemeToggle from "@/components/appComponents/ThemeToggle";
+import { useTheme } from "@/context/themeProvider";
 
 interface ErrorResponse {
   error?: string;
@@ -13,6 +15,7 @@ interface ErrorResponse {
 
 const LoginPage = () => {
   const router = useRouter();
+  const { theme } = useTheme();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -70,24 +73,47 @@ const LoginPage = () => {
   const emailNotVerified = "The Email is not verified";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex items-center justify-center p-4">
-      <div className="max-w-md w-full space-y-8">
+    <div
+      className={`min-h-screen flex items-center justify-center p-4 ${
+        theme === "Dark"
+          ? "bg-gradient-to-br from-gray-900 to-black"
+          : "bg-light-gradient"
+      }`}
+    >
+      {/* Theme Toggle - Positioned at the top right */}
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+
+      <div className="max-w-md w-full space-y-8 ">
         {/* Logo/Header Section */}
         <div className="text-center">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
             CloudyGo
           </h1>
-          <h2 className="text-xl text-gray-300">Welcome Back</h2>
+          <h2
+            className={`text-xl ${
+              theme === "Dark" ? "text-gray-300" : "text-gray-500"
+            }`}
+          >
+            Welcome Back
+          </h2>
         </div>
 
         {/* Login Form Container */}
-        <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-gray-700/30">
+        <div
+          className={`${
+            theme === "Dark" ? "bg-gray-900/50 " : "bg-slate-200"
+          } backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-gray-700/30`}
+        >
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Email Field */}
             <div>
               <label
                 htmlFor="email"
-                className="block text-gray-300 text-sm font-medium mb-2"
+                className={`block ${
+                  theme === "Dark" ? "text-gray-300" : "text-gray-500"
+                } text-sm font-medium mb-2`}
               >
                 Email
               </label>
@@ -98,10 +124,14 @@ const LoginPage = () => {
                 required
                 value={formData.email}
                 onChange={onChange}
-                className={`w-full px-4 py-3 bg-gray-800/50 border ${
+                className={`w-full px-4 py-3 ${
+                  theme === "Dark"
+                    ? "bg-gray-800/50 text-white"
+                    : "bg-white text-black"
+                } border ${
                   errorMessage.includes("Email")
                     ? "border-red-500"
-                    : "border-gray-700"
+                    : "border-none"
                 } rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent text-white transition-all duration-200 ${
                   isLoading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
@@ -114,7 +144,9 @@ const LoginPage = () => {
             <div>
               <label
                 htmlFor="password"
-                className="block text-gray-300 text-sm font-medium mb-2"
+                className={`block ${
+                  theme === "Dark" ? "text-gray-300" : "text-gray-500"
+                } text-sm font-medium mb-2`}
               >
                 Password
               </label>
@@ -126,12 +158,16 @@ const LoginPage = () => {
                 value={formData.password}
                 onChange={onChange}
                 disabled={isLoading}
-                className={`w-full px-4 py-3 bg-gray-800/50 border ${
+                className={`w-full px-4 py-3 ${
+                  theme === "Dark"
+                    ? "bg-gray-800/50 text-white"
+                    : "bg-white text-black"
+                } border ${
                   errorMessage
                     ? errorMessage === emailNotVerified
                       ? ""
                       : "border-red-500"
-                    : "border-gray-700"
+                    : "border-none"
                 } rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent text-white transition-all duration-200 ${
                   isLoading ? "opacity-50 cursor-not-allowed" : ""
                 }`}

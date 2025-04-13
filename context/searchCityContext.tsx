@@ -57,7 +57,6 @@ export const CityProvider = ({ children }: { children: ReactNode }) => {
   const addToFavorites = (cityName: string) => {
     if (!cityName) return;
 
-    // Don't add duplicates
     if (!favorites.includes(cityName)) {
       setFavorites([...favorites, cityName]);
     }

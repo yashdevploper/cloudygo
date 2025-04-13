@@ -4,6 +4,8 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import Link from "next/link";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { useTheme } from "@/context/themeProvider";
+import ThemeToggle from "@/components/appComponents/ThemeToggle";
 
 const SignupPage = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +18,7 @@ const SignupPage = () => {
   const [passwordError, setPasswordError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [signupSuccess, setSignupSuccess] = useState(false);
+  const { theme } = useTheme();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -83,18 +86,37 @@ const SignupPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex items-center justify-center p-4">
+    <div
+      className={`min-h-screen flex items-center justify-center p-4 ${
+        theme === "Dark" ? "radialBg" : "bg-light-gradient"
+      }`}
+    >
+      {/* Theme Toggle - Positioned at the top right */}
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+
       <div className="max-w-md w-full space-y-8">
         {/* Logo/Header Section */}
         <div className="text-center">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">
             CloudyGo
           </h1>
-          <h2 className="text-xl text-gray-300">Create an Account</h2>
+          <h2
+            className={`text-xl ${
+              theme === "Dark" ? "text-gray-300" : "text-gray-500"
+            }`}
+          >
+            Create an Account
+          </h2>
         </div>
 
         {/* Signup Form Container */}
-        <div className="bg-gray-900/50 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-gray-700/30">
+        <div
+          className={`${
+            theme === "Dark" ? "bg-gray-900/50 " : "bg-slate-200"
+          } backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-gray-700/30`}
+        >
           {signupSuccess ? (
             <div className="text-center">
               <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100/10 backdrop-blur-sm border border-green-500/30 mb-4">
@@ -135,7 +157,7 @@ const SignupPage = () => {
               <div>
                 <label
                   htmlFor="username"
-                  className="block text-gray-300 text-sm font-medium mb-2"
+                  className={`block ${theme === "Dark"?"text-gray-300": "text-gray-500"} text-sm font-medium mb-2`}
                 >
                   Username
                 </label>
@@ -146,7 +168,7 @@ const SignupPage = () => {
                   required
                   value={formData.username}
                   onChange={handleChange}
-                  className={`w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent text-white transition-all duration-200 ${
+                  className={`w-full px-4 py-3 ${theme === "Dark"?"bg-gray-800/50 text-white": "bg-white text-black"} border-gray-700 rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent transition-all duration-200 ${
                     isLoading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                   placeholder="Enter your username"
@@ -157,7 +179,7 @@ const SignupPage = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-gray-300 text-sm font-medium mb-2"
+                  className={`block ${theme === "Dark"?"text-gray-300": "text-gray-500"} text-sm font-medium mb-2`}
                 >
                   Email
                 </label>
@@ -172,7 +194,7 @@ const SignupPage = () => {
                     passwordError === "Email already exists"
                       ? "border-red-500"
                       : ""
-                  } w-full px-4 py-3 bg-gray-800/50 border border-gray-700 rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent text-white transition-all duration-200 ${
+                  } w-full px-4 py-3 ${theme === "Dark"?"bg-gray-800/50 text-white": "bg-white text-black"} border-gray-700 rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent transition-all duration-200 ${
                     isLoading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                   placeholder="Enter your email"
@@ -183,7 +205,7 @@ const SignupPage = () => {
               <div>
                 <label
                   htmlFor="password"
-                  className="block text-gray-300 text-sm font-medium mb-2"
+                  className={`block ${theme === "Dark"?"text-gray-300": "text-gray-500"} text-sm font-medium mb-2`}
                 >
                   Password
                 </label>
@@ -195,11 +217,11 @@ const SignupPage = () => {
                   value={formData.password}
                   onChange={handleChange}
                   disabled={isLoading}
-                  className={`w-full px-4 py-3 bg-gray-800/50 border ${
+                  className={`w-full px-4 py-3 ${theme === "Dark"?"bg-gray-800/50 text-white": "bg-white text-black"} border ${
                     passwordError === "Passwords do not match!"
                       ? "border-red-500"
-                      : "border-gray-700"
-                  } rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent text-white transition-all duration-200 ${
+                      : "border-none"
+                  } rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent  transition-all duration-200 ${
                     isLoading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                   placeholder="Create a password"
@@ -210,7 +232,7 @@ const SignupPage = () => {
               <div>
                 <label
                   htmlFor="confirmPassword"
-                  className="block text-gray-300 text-sm font-medium mb-2"
+                  className={`block ${theme === "Dark"?"text-gray-300": "text-gray-500"} text-sm font-medium mb-2`}
                 >
                   Confirm Password
                 </label>
@@ -222,11 +244,11 @@ const SignupPage = () => {
                   value={confirmPassword}
                   onChange={handleChange}
                   disabled={isLoading}
-                  className={`w-full px-4 py-3 bg-gray-800/50 border ${
+                  className={`w-full px-4 py-3  ${theme === "Dark"?"bg-gray-800/50 text-white": "bg-white text-black"} border ${
                     passwordError === "Passwords do not match!"
                       ? "border-red-500"
-                      : "border-gray-700"
-                  } rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent text-white transition-all duration-200 ${
+                      : "border-none"
+                  } rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent  transition-all duration-200 ${
                     isLoading ? "opacity-50 cursor-not-allowed" : ""
                   }`}
                   placeholder="Confirm your password"

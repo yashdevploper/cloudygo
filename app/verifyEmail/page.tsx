@@ -5,6 +5,8 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import axios from "axios";
 import Link from "next/link";
+import ThemeToggle from "@/components/appComponents/ThemeToggle";
+import { useTheme } from "@/context/themeProvider";
 
 // Client component that uses useSearchParams
 const VerifyEmailContent = () => {
@@ -14,6 +16,7 @@ const VerifyEmailContent = () => {
   const [verificationSuccess, setVerificationSuccess] = useState(false);
   const [verificationError, setVerificationError] = useState("");
   const token = searchParams.get("token");
+  const { theme } = useTheme();
 
   // Countdown timer for resend
   useEffect(() => {
@@ -62,7 +65,18 @@ const VerifyEmailContent = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-black flex items-center justify-center p-4">
+    <div
+      className={`min-h-screen flex items-center justify-center p-4 ${
+        theme === "Dark"
+          ? "bg-gradient-to-br from-gray-900 to-black"
+          : "bg-light-gradient"
+      }`}
+    >
+      {/* Theme Toggle - Positioned at the top right */}
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+
       <div className="max-w-md w-full space-y-8">
         {/* Logo/Header Section */}
         <div className="text-center">

@@ -1,12 +1,20 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { LineDoteChart } from "@/components/ui/lineChartCustomDots";
 import NavBar from "@/components/appComponents/NavBar";
 import { WeatherLocationCard } from "@/components/appComponents/WeatherLocationCard";
 import { WeatherSunCard } from "@/components/appComponents/WeatherSunCard";
 import { useCity } from "@/context/searchCityContext";
 import { Heart, MapPin } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
+import { useTheme } from "@/context/themeProvider";
 
 export default function WeatherDashboard() {
   const {
@@ -45,8 +53,14 @@ export default function WeatherDashboard() {
     fetchWeatherData(favoriteCity);
   };
 
+  const { theme } = useTheme();
+
   return (
-    <div className="w-full min-h-screen radialBg">
+    <div
+      className={`w-full min-h-screen  ${
+        theme === "Dark" ? "radialBg" : "bg-light-gradient"
+      }`}
+    >
       <NavBar />
       <div className=" px-3 py-4 sm:px-4 sm:py-6 lg:px-6">
         <main className="max-w-7xl mx-auto space-y-6 sm:space-y-8 mt-6">
@@ -54,36 +68,40 @@ export default function WeatherDashboard() {
             <h2 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4 px-1">
               Favorites
             </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-              {favorites.length > 0 ? (
-                favorites.map((favoriteCity) => (
-                  <div
-                    key={favoriteCity}
-                    onClick={() => handleFavoriteClick(favoriteCity)}
-                    className="h-24 bg-card rounded-lg shadow flex flex-col items-center justify-center cursor-pointer hover:bg-primary/10 transition-colors p-3"
-                  >
-                    <div className="flex items-center mb-2">
-                      <MapPin className="w-4 h-4 mr-1 text-primary" />
-                      <span className="font-medium truncate">
-                        {favoriteCity}
+            <Carousel>
+              <CarouselContent className="ml-4 gap-3">
+                {favorites.length > 0 ? (
+                  favorites.map((favoriteCity) => (
+                    <div
+                      key={favoriteCity}
+                      onClick={() => handleFavoriteClick(favoriteCity)}
+                      className="h-24 bg-card rounded-lg shadow flex flex-col items-center justify-center cursor-pointer hover:bg-primary/10 transition-colors p-3 min-w-[80vw] sm:min-w-[50vw] md:min-w-[14vw]"
+                    >
+                      <div className="flex items-center mb-2">
+                        <MapPin className="w-4 h-4 mr-1 text-primary" />
+                        <span className="font-medium truncate">
+                          {favoriteCity}
+                        </span>
+                      </div>
+                      <span className="text-xs text-muted-foreground">
+                        Click to view
                       </span>
                     </div>
-                    <span className="text-xs text-muted-foreground">
-                      Click to view
-                    </span>
-                  </div>
-                ))
-              ) : (
-                <>
-                  <div className="h-24 bg-card/60 rounded-lg shadow flex items-center justify-center text-muted-foreground">
-                    No favorites yet
-                  </div>
-                  <div className="h-24 bg-card/60 rounded-lg shadow hidden sm:flex items-center justify-center text-muted-foreground">
-                    Search for cities to add
-                  </div>
-                </>
-              )}
-            </div>
+                  ))
+                ) : (
+                  <>
+                    <div className="h-24 bg-card/60 rounded-lg shadow flex items-center justify-center text-muted-foreground">
+                      No favorites yet
+                    </div>
+                    <div className="h-24 bg-card/60 rounded-lg shadow hidden sm:flex items-center justify-center text-muted-foreground">
+                      Search for cities to add
+                    </div>
+                  </>
+                )}
+              </CarouselContent>
+              <CarouselPrevious className="cursor-pointer" />
+              <CarouselNext className="cursor-pointer" />
+            </Carousel>
           </section>
 
           <section className="my-location space-y-4 sm:space-y-6">

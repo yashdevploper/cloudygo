@@ -121,8 +121,34 @@
   }
   .radialBg {
     @apply bg-gradient-to-br from-gray-900 to-black;
+    .title {
+      @apply font-bold text-xl;
+    }
   }
-  .title{
-    @apply font-bold text-xl
-  }
+  
+}
+
+.bg-light-gradient {
+  background-image: linear-gradient(
+    to bottom right,
+    oklch(0.93 0.003 285.823),
+    oklch(0.97 0.001 285.823)
+  );
+}
+::-webkit-scrollbar {
+  width: 5.5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.6);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(156, 163, 175, 0.6);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(107, 114, 128, 0.8);
 }
