@@ -11,14 +11,18 @@ const ThemeToggle = () => {
       className="p-2 cursor-pointer rounded-full "
     >
       {theme === "Dark" ? (
-        <Avatar className="w-[24px] hover:rotate-90  transition duration-200">
+        <Avatar className="w-[30px] hover:rotate-90  transition duration-200">
           <AvatarImage src="/lightMod.svg" />
-          <AvatarFallback>theme toggle</AvatarFallback>
+          <AvatarFallback>
+            <div className=" h-full w-full bg-card/60 animate-pulse"></div>
+          </AvatarFallback>
         </Avatar>
       ) : (
         <Avatar className="w-[24px] rotate-12 hover:-rotate-z-[20deg]  transition duration-200">
           <AvatarImage src="/darkMod.svg" />
-          <AvatarFallback></AvatarFallback>
+          <AvatarFallback>
+            <div className=" h-full w-full bg-card/60 animate-pulse"></div>
+          </AvatarFallback>
         </Avatar>
       )}
     </button>

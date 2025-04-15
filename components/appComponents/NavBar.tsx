@@ -68,7 +68,9 @@ const NavBar = () => {
           <div>
             <Avatar>
               <AvatarImage src="/png/profile.png" />
-              <AvatarFallback>Profile</AvatarFallback>
+              <AvatarFallback>
+                <div className=" h-full w-full bg-card/60 animate-pulse"></div>
+              </AvatarFallback>
             </Avatar>
           </div>
         </Link>
