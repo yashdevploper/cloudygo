@@ -57,7 +57,7 @@ export default function WeatherDashboard() {
 
   return (
     <div
-      className={`w-full min-h-screen  ${
+      className={`w-full min-h-screen overflow-x-hidden  ${
         theme === "Dark" ? "radialBg" : "bg-light-gradient"
       }`}
     >

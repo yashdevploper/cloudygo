@@ -5,6 +5,7 @@ import { Clock, MapPin, Thermometer, Globe } from "lucide-react";
 import NavBar from "@/components/appComponents/NavBar";
 import { Card } from "@/components/ui/card";
 import { useTheme } from "@/context/themeProvider";
+import { RefreshCw } from "lucide-react";
 import axios from "axios";
 
 export default function WeatherHistoryPage() {
@@ -21,19 +22,18 @@ export default function WeatherHistoryPage() {
 
   const { theme } = useTheme();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false)
+  const [error, setError] = useState(false);
   const [historyData, setHistoryData] = useState<HistoryItem[]>([]);
 
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        setIsLoading(true)
+        setIsLoading(true);
         const response = await axios.get("/api/user/history");
         setHistoryData(response.data.history);
-        setIsLoading(false)
-
+        setIsLoading(false);
       } catch (error) {
-        setError(true)
+        setError(true);
         console.error("Error fetching history:", error);
       }
     };
@@ -60,7 +60,7 @@ export default function WeatherHistoryPage() {
                 <p className="text-destructive font-medium">{error}</p>
                 <button
                   onClick={() => {
-                    /* Add retry logic */
+                    <RefreshCw />;
                   }}
                   className="mt-2 text-sm px-3 py-1 rounded-full bg-card hover:bg-primary/10 transition-colors"
                 >
@@ -70,7 +70,7 @@ export default function WeatherHistoryPage() {
             ) : (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {isLoading ? (
-                  Array(6)
+                  Array(8)
                     .fill(0)
                     .map((_, index) => (
                       <Card

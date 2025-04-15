@@ -22,7 +22,9 @@ export async function GET(request: NextRequest) {
       });
     }
 
-    return NextResponse.json({message: "user found", history: user.userHistory})
+    const reversedUserHistory = user.userHistory.slice().reverse()
+
+    return NextResponse.json({message: "user found", history: reversedUserHistory})
 
   } catch (error) {
     const typedError = error as Error;
