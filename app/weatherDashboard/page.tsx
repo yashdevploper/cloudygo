@@ -33,7 +33,7 @@ export default function WeatherDashboard() {
   // Fetch default weather data on first load
   useEffect(() => {
     if (!weatherData && !isLoading) {
-      fetchWeatherData("New York"); // Default city
+      fetchWeatherData("jasdan"); // Default city
     }
   }, [weatherData, isLoading, fetchWeatherData]);
 
@@ -118,7 +118,7 @@ export default function WeatherDashboard() {
               {!isLoading && weatherData && (
                 <button
                   onClick={handleFavoriteToggle}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer ${
                     isFavorite(weatherData.city)
                       ? "bg-pink-500/20 text-pink-600 hover:bg-pink-500/30"
                       : "bg-card hover:bg-primary/10"

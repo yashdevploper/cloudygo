@@ -73,7 +73,7 @@ export const CityProvider = ({ children }: { children: ReactNode }) => {
   const fetchWeatherData = async (cityName: string) => {
     if (!cityName) return;
 
-    setIsLoading(true);
+    setIsLoading(true); 
     setError(null);
 
     try {

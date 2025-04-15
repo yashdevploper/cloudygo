@@ -101,21 +101,23 @@ export default function Home() {
 
         {/* CTA Section */}
         <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full">
-          <Link
-            href="/weatherDashboard"
-            className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-cyan-400 to-blue-400 
+          <Link href="/weatherDashboard">
+            <div
+              className="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-cyan-400 to-blue-400 
                     text-black rounded-xl cursor-pointer hover:opacity-90 transition-all 
                     duration-300 font-semibold text-lg shadow-lg hover:shadow-cyan-400/20 text-center"
-          >
-            Get Started
+            >
+              Get Started
+            </div>
           </Link>
-          <Link
-            href="/login"
-            className="w-full sm:w-auto px-8 py-3 bg-gray-800/50 border border-gray-700/30
+          <Link href="/login">
+            <div
+              className="w-full sm:w-auto px-8 py-3 bg-gray-800/50 border border-gray-700/30
                     text-white rounded-xl cursor-pointer hover:bg-gray-800/70 transition-all 
                     duration-300 font-semibold text-lg text-center"
-          >
-            Sign In
+            >
+              Sign In
+            </div>
           </Link>
         </div>
       </main>

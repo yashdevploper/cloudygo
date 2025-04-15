@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/card";
 import { LogOut, User, MapPin, History, Heart, Settings } from "lucide-react";
 import { useTheme } from "@/context/themeProvider";
+import Link from "next/link";
 
 interface UserProfile {
   _id?: string;
@@ -33,7 +34,7 @@ export default function ProfilePage() {
   const router = useRouter();
   const [user, setUser] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const {theme} = useTheme();
+  const { theme } = useTheme();
 
   // Fetch user details on page load
   useEffect(() => {
@@ -72,7 +73,9 @@ export default function ProfilePage() {
 
   return (
     <div
-      className={`min-h-screen ${theme === "Dark" ? "radialBg" : "bg-light-gradient"}`}
+      className={`min-h-screen ${
+        theme === "Dark" ? "radialBg" : "bg-light-gradient"
+      }`}
     >
       <NavBar />
 
@@ -139,15 +142,17 @@ export default function ProfilePage() {
               {/* Weather History */}
               <Card>
                 <CardHeader className="pb-2">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <CardTitle>Weather History</CardTitle>
-                      <CardDescription>
-                        Recent locations you&apos;ve checked
-                      </CardDescription>
+                  <Link href={"/history"}>
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <CardTitle>Weather History</CardTitle>
+                        <CardDescription>
+                          Recent locations you&apos;ve checked
+                        </CardDescription>
+                      </div>
+                      <History className="h-5 w-5 text-muted-foreground" />
                     </div>
-                    <History className="h-5 w-5 text-muted-foreground" />
-                  </div>
+                  </Link>
                 </CardHeader>
                 <CardContent>
                   {user?.userHistory && user.userHistory.length > 0 ? (
@@ -186,6 +191,7 @@ export default function ProfilePage() {
 
               {/* Quick Actions */}
               <div className="grid grid-cols-2 gap-4">
+                <Link href={"/favorites"}>
                 <Card className="bg-primary/5 cursor-pointer hover:bg-primary/10 transition-colors">
                   <CardContent className="flex flex-col items-center justify-center py-6">
                     <Heart className="h-8 w-8 text-pink-500 mb-2" />
@@ -195,6 +201,7 @@ export default function ProfilePage() {
                     </p>
                   </CardContent>
                 </Card>
+                </Link>
 
                 <Card className="bg-primary/5 cursor-pointer hover:bg-primary/10 transition-colors">
                   <CardContent className="flex flex-col items-center justify-center py-6">
