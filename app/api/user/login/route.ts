@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import sendEmail from "@/utils/mailer/mailer";
+import axios from "axios";
 connectUser();
 
 export async function POST(request: NextRequest) {
@@ -64,11 +64,16 @@ export async function POST(request: NextRequest) {
       httpOnly: true,
     });
 
-    sendEmail({
-      email: user.email,
-      emailType: "WELCOME",
-      userId: user._id,
-    });
+        await axios.post("/api/user/sendEmail", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            userId: user._id,
+            email: user.email,
+            emailType: "WELCOME",
+          },
+        });
 
     return response;
   } catch (error: unknown) {

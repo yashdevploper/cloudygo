@@ -1,16 +1,16 @@
 import connectUser from "@/utils/mongoDbConfig/connectUser";
 import { NextResponse } from "next/server";
-import type { NextRequest } from 'next/server'
+import type { NextRequest } from "next/server";
 import UserModel from "@/model/UserModel";
 import bcrypt from "bcryptjs";
-import { sendEmail } from "@/utils/mailer/mailer";
+import axios from "axios";
 
 connectUser();
 export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
 
-    if (Object.values(reqBody).some((value) => !value)) { 
+    if (Object.values(reqBody).some((value) => !value)) {
       return NextResponse.json(
         { message: "Please provide all the required fields." },
         { status: 400 }
@@ -42,7 +42,17 @@ export async function POST(request: NextRequest) {
     // send verification email
     const userId = savedUser._id;
     const emailType = "VERIFY";
-    sendEmail({ userId, email, emailType });
+    await axios.post("/api/user/sendEmail", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: {
+        userId,
+        email,
+        emailType,
+      },
+    });
+    console.log("email route hit");
 
     const response = NextResponse.json(
       {
