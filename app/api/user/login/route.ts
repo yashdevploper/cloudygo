@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import axios from "axios";
 connectUser();
 
 export async function POST(request: NextRequest) {
