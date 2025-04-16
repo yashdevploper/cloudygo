@@ -64,16 +64,18 @@ export async function POST(request: NextRequest) {
       httpOnly: true,
     });
 
-        await axios.post("/api/user/sendEmail", {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: {
-            userId: user._id,
-            email: user.email,
-            emailType: "WELCOME",
-          },
-        });
+    console.log("Cookie set");
+    
+        // await axios.post("/api/user/sendEmail", {
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: {
+        //     userId: user._id,
+        //     email: user.email,
+        //     emailType: "WELCOME",
+        //   },
+        // });
 
     return response;
   } catch (error: unknown) {
