@@ -14,13 +14,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { LogOut, User, MapPin, History, Heart, Settings } from "lucide-react";
+import { LogOut, User, MapPin, History, Heart } from "lucide-react";
 import { useTheme } from "@/context/themeProvider";
 import Link from "next/link";
 
 interface UserProfile {
   _id?: string;
-  name?: string;
+  username?: string;
   email?: string;
   createdAt?: string;
   userHistory?: Array<{
@@ -101,7 +101,7 @@ export default function ProfilePage() {
                 </div>
 
                 <div className="text-center">
-                  <h2 className="text-xl font-bold">{user?.name || "User"}</h2>
+                  <h2 className="text-xl font-bold">{user?.username || "User"}</h2>
                   <p className="text-sm text-muted-foreground">{user?.email}</p>
                 </div>
 
@@ -192,26 +192,28 @@ export default function ProfilePage() {
               {/* Quick Actions */}
               <div className="grid grid-cols-2 gap-4">
                 <Link href={"/favorites"}>
-                <Card className="bg-primary/5 cursor-pointer hover:bg-primary/10 transition-colors">
-                  <CardContent className="flex flex-col items-center justify-center py-6">
-                    <Heart className="h-8 w-8 text-pink-500 mb-2" />
-                    <h3 className="font-medium">Favorites</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Manage your favorite cities
-                    </p>
-                  </CardContent>
-                </Card>
+                  <Card className="bg-primary/5 cursor-pointer hover:bg-primary/10 transition-colors">
+                    <CardContent className="flex flex-col items-center justify-center py-6">
+                      <Heart className="h-8 w-8 text-pink-500 mb-2" />
+                      <h3 className="font-medium">Favorites</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Manage your favorite cities
+                      </p>
+                    </CardContent>
+                  </Card>
                 </Link>
 
-                <Card className="bg-primary/5 cursor-pointer hover:bg-primary/10 transition-colors">
-                  <CardContent className="flex flex-col items-center justify-center py-6">
-                    <Settings className="h-8 w-8 text-primary mb-2" />
-                    <h3 className="font-medium">Settings</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Customize your preferences
-                    </p>
-                  </CardContent>
-                </Card>
+                <Link href={"/history"}>
+                  <Card className="bg-primary/5 cursor-pointer hover:bg-primary/10 transition-colors">
+                    <CardContent className="flex flex-col items-center justify-center py-6">
+                      <History className="h-8 w-8 text-primary mb-2" />
+                      <h3 className="font-medium">History</h3>
+                      <p className="text-sm text-muted-foreground">
+                        watch your search history
+                      </p>
+                    </CardContent>
+                  </Card>
+                </Link>
               </div>
             </div>
           </div>

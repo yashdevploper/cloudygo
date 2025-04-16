@@ -132,7 +132,7 @@ const LoginPage = () => {
                   errorMessage.includes("Email")
                     ? "border-red-500"
                     : "border-none"
-                } rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent text-white transition-all duration-200 ${
+                } rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent      transition-all duration-200 ${
                   isLoading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
                 placeholder="Enter your email"
@@ -168,7 +168,7 @@ const LoginPage = () => {
                       ? ""
                       : "border-red-500"
                     : "border-none"
-                } rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent text-white transition-all duration-200 ${
+                } rounded-xl focus:ring-2 focus:ring-cyan-400/50 focus:border-transparent transition-all duration-200 ${
                   isLoading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
                 placeholder="Enter your password"
